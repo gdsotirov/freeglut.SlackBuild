@@ -19,13 +19,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: freeglut.SlackBuild,v 1.4 2016/09/01 09:19:18 gsotirov Exp $
+# $Id: freeglut.SlackBuild,v 1.5 2016/09/01 10:05:11 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=freeglut
-VERSION=2.6.0
+VERSION=2.8.1
 ARCH=${ARCH:-i486}
 BUILD=${BUILD:-1}
 
