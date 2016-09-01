@@ -19,13 +19,13 @@
 #
 # Visit SlackPack at http://sotirov-bg.net/slackpack/
 #
-# $Id: freeglut.SlackBuild,v 1.5 2016/09/01 10:05:11 gsotirov Exp $
+# $Id: freeglut.SlackBuild,v 1.6 2016/09/01 11:18:51 gsotirov Exp $
 #
 
 . ../../slack-package.conf
 
 NAME=freeglut
-VERSION=2.8.1
+VERSION=3.0.0
 ARCH=${ARCH:-i486}
 BUILD=${BUILD:-1}
 
@@ -55,20 +55,19 @@ tar -xvf $CWD/$NAME-$VERSION.tar.gz || exit 3
 cd $SRC
 fix_source
 
-CFLAGS=$SLKCFLAGS \
-CXXFLAGS=$SLKCFLAGS \
-./configure --build=$ARCH-slackware-linux \
-            --host=$ARCH-slackware-linux \
-            --prefix=/usr \
-            --libdir=/usr/lib${LIBDIRSUFFIX} \
-            --sysconfdir=/etc \
-            --mandir=/usr/man \
-            --enable-shared=yes \
-            --enable-static=no \
-            --enable-warnings=no || exit 5
+cmake . -LAH \
+        -DCMAKE_C_FLAGS="$SLKCFLAGS" \
+        -DCMAKE_CXX_FLAGS="$SLKCFLAGS" \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_LIBDIR=lib${LIBDIRSUFFIX} \
+        -DFREEGLUT_BUILD_SHARED_LIBS=ON \
+        -DFREEGLUT_BUILD_STATIC_LIBS=OFF \
+        -DFREEGLUT_PRINT_ERRORS=ON \
+        -DFREEGLUT_PRINT_WARNINGS=ON || exit 5
 
-make -j4 || exit 6
-make DESTDIR=$PKG install || exit 7
+make VERBOSE=1 -j4 || exit 6
+make VERBOSE=1 DESTDIR=$PKG install || exit 7
 
 bin_perms $PKG
 ( cd $PKG; strip_bin; strip_lib )
