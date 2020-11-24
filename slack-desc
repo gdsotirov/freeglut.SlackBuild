@@ -10,4 +10,4 @@ freeglut: GLUT (and hence freeglut) allows the user to create and manage
 freeglut: windows containing OpenGL contexts on a wide range of platforms and
 freeglut: also read the mouse, keyboard and joystick functions.
 freeglut: freeglut is released under the X-Consortium license.
-freeglut: Packaged by Georgi D. Sotirov <gdsotirov@dir.bg>
+freeglut: Packaged by Georgi D. Sotirov <gdsotirov@gmail.com>
